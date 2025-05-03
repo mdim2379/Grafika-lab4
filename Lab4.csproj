@@ -1,0 +1,25 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net8.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <AllowUnsafeBlocks>True</AllowUnsafeBlocks>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Silk.NET" Version="2.20.0" />
+    <PackageReference Include="Silk.NET.OpenGL.Extensions.ImGui" Version="2.20.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Remove="Resources\teapot.obj" />
+    <EmbeddedResource Include="Resources\teapot.obj" />
+    <None Remove="Resources\slot_machine.obj" />
+    <EmbeddedResource Include="Resources\slot_machine.obj" />
+    <None Remove="Resources\minicooper.obj" />
+    <EmbeddedResource Include="Resources\minicooper.obj" />
+  </ItemGroup>
+
+</Project>
