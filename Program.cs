@@ -20,8 +20,6 @@ namespace Lab4
 
         private static uint program;
 
-        private static GlObject glCube;
-
         private static GlObject glTeapot;
 
         private static float Shininess = 40;
@@ -177,36 +175,44 @@ namespace Lab4
             switch (key)
             {
                 case Key.Left:
-                    cameraDescriptor.DecreaseZYAngle();
-                    break;
-                    ;
-                case Key.Right:
                     cameraDescriptor.IncreaseZYAngle();
                     break;
-                case Key.Down:
-                    cameraDescriptor.IncreaseDistance();
+                case Key.Right:
+                    cameraDescriptor.DecreaseZYAngle();
                     break;
                 case Key.Up:
-                    cameraDescriptor.DecreaseDistance();
-                    break;
-                case Key.U:
                     cameraDescriptor.IncreaseZXAngle();
                     break;
-                case Key.D:
+                case Key.Down:
                     cameraDescriptor.DecreaseZXAngle();
                     break;
+                case Key.W:
+                    cameraDescriptor.setOffset(0);
+                    break;
+                case Key.A:
+                    cameraDescriptor.setOffset(1);
+                    break;
+                case Key.S:
+                    cameraDescriptor.setOffset(2);
+                    break;
+                case Key.D:
+                    cameraDescriptor.setOffset(3);
+                    break;
                 case Key.Space:
-                    cubeArrangementModel.AnimationEnabled = !cubeArrangementModel.AnimationEnabled;
+                    cameraDescriptor.setOffset(4);
+                    break;
+                case Key.ControlLeft:
+                    cameraDescriptor.setOffset(5);
                     break;
             }
         }
+
 
         private static void GraphicWindow_Update(double deltaTime)
         {
             // no GL
             // not threadsafe
             cubeArrangementModel.AdvanceTime(deltaTime);
-
             imGuiController.Update((float)deltaTime);
         }
 
@@ -281,7 +287,8 @@ namespace Lab4
         {
             Gl.BindVertexArray(glTeapot.Vao);
             Matrix4X4<float> modelMatrixForCenterCube = Matrix4X4.CreateScale((float)cubeArrangementModel.CenterCubeScale);
-            SetModelMatrix(modelMatrixForCenterCube);
+            Matrix4X4<float> rotationMatrix = Matrix4X4.CreateRotationX(-MathF.PI / 2);
+            SetModelMatrix(modelMatrixForCenterCube * rotationMatrix);
             Gl.DrawElements(PrimitiveType.Triangles, glTeapot.IndexArrayLength, DrawElementsType.UnsignedInt, null);
             Gl.BindVertexArray(0);
         }

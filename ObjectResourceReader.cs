@@ -16,6 +16,7 @@ namespace Lab4
         {
             List<float[]> objVertices = new List<float[]>();
             List<int[]> objFaces = new List<int[]>();
+            List<float[]> objNormals = new List<float[]>();
 
             string fullResourceName = "Lab4.Resources." + resourceName;
             using (var objStream = typeof(ObjectResourceReader).Assembly.GetManifestResourceStream(fullResourceName))
@@ -57,6 +58,14 @@ namespace Lab4
                                 face[2] = indices2[i + 1];
                                 objFaces.Add(face);
                             }
+                            break;
+                        case "vt":
+                            float[] normals = new float[3];
+                            for (int i = 0; i < normals.Length; ++i)
+                            {
+                                normals[i] = float.Parse(lineData[i], CultureInfo.InvariantCulture);
+                            }
+                                objNormals.Add(normals);
                             break;
                     }
                 }
