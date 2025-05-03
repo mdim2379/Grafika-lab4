@@ -142,8 +142,7 @@ namespace Lab4
             Gl.EnableVertexAttribArray(0);
             Gl.VertexAttribPointer(2, 3, VertexAttribPointerType.Float, true, vertexSize, (void*)offsetNormals);
             Gl.EnableVertexAttribArray(2);
-
-
+            
             uint colors = Gl.GenBuffer();
             Gl.BindBuffer(BufferTargetARB.ArrayBuffer, colors);
             Gl.BufferData(BufferTargetARB.ArrayBuffer, (ReadOnlySpan<float>)colorArray.AsSpan(), BufferUsageARB.StaticDraw);

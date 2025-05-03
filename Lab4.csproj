@@ -14,12 +14,16 @@
   </ItemGroup>
 
   <ItemGroup>
-    <None Remove="Resources\teapot.obj" />
-    <EmbeddedResource Include="Resources\teapot.obj" />
     <None Remove="Resources\slot_machine.obj" />
     <EmbeddedResource Include="Resources\slot_machine.obj" />
     <None Remove="Resources\minicooper.obj" />
     <EmbeddedResource Include="Resources\minicooper.obj" />
+    <None Remove="Resources\bombardino_crocodilo.obj" />
+    <EmbeddedResource Include="Resources\bombardino_crocodilo.obj" />
+    <None Remove="Resources\teapot.obj" />
+    <EmbeddedResource Include="Resources\teapot.obj" />
+    <None Remove="Resources\teapot2.obj" />
+    <EmbeddedResource Include="Resources\teapot2.obj" />
   </ItemGroup>
 
 </Project>
