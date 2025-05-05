@@ -10,7 +10,7 @@ namespace Lab4;
 
 internal class Program
 {
-    private const string fileName = "teapot.obj";
+    private const string fileName = "minicooper.obj";
 
     private const string ModelMatrixVariableName = "uModel";
     private const string NormalMatrixVariableName = "uNormal";
@@ -79,7 +79,7 @@ internal class Program
             float ambientStrength = 0;
             vec3 ambient = ambientStrength * lightColor;
 
-            float diffuseStrength = 1;
+            float diffuseStrength = 0.5;
             vec3 norm = normalize(outNormal);
             vec3 lightDir = normalize(lightPos - outWorldPosition);
             float diff = max(dot(norm, lightDir), 0.0);
@@ -127,11 +127,11 @@ internal class Program
 
         Gl.ClearColor(Color.White);
 
-        Gl.Enable(EnableCap.CullFace);
-        Gl.CullFace(GLEnum.Front);
-
         Gl.Enable(EnableCap.DepthTest);
         Gl.DepthFunc(DepthFunction.Lequal);
+
+        Gl.Enable(EnableCap.CullFace);
+        Gl.CullFace(GLEnum.Back);
 
         glTeapot = ObjectResourceReader.CreateObjectFromResource(Gl, fileName);
         kocka = ModelObjectDescriptor.CreateBronzeCube(Gl);
@@ -275,9 +275,9 @@ internal class Program
     private static unsafe void DrawCenteredPulsingTeapot()
     {
         Gl.BindVertexArray(glTeapot.Vao);
-        var ScaleVal = 0.01f;
+        var ScaleVal = 0.11f;
         var modelMatrixForCenterCube = Matrix4X4.CreateScale(ScaleVal, ScaleVal, ScaleVal);
-        var rotationMatrix = Matrix4X4.CreateRotationX(0f);
+        var rotationMatrix = Matrix4X4.CreateRotationX(-(float)Math.PI / 2);
         SetModelMatrix(modelMatrixForCenterCube * rotationMatrix);
         Gl.DrawElements(PrimitiveType.Triangles, glTeapot.IndexArrayLength, DrawElementsType.UnsignedInt, null);
         Gl.BindVertexArray(0);
